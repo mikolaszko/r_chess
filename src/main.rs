@@ -14,6 +14,8 @@ fn main() {
         file_path: String::from(file_string),
     };
 
+    fen.process();
+
     let init: HashMap<Square, Option<Piece>> = HashMap::new();
     // notation
     let board = Board { board_state: init };
