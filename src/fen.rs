@@ -1,4 +1,4 @@
-use crate::file::*;
+use crate::{file::*, rank::Rank};
 use std::fs;
 
 pub struct BoardBuilder {
@@ -18,15 +18,22 @@ impl BoardBuilder {
         let ep = fields[3];
 
         let mut curr_file = File::A;
+        let mut curr_rank = Rank::Eigth;
 
         for c in pieces.chars() {
             match c {
                 '/' => {
-                    curr_file = curr_file.right();
+                    curr_rank = curr_rank.down();
+                    curr_file = File::A;
                 }
+                '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' => {
+                    // math from ascii table like in the case of 8 = 0 + 56 - 48
+                    curr_file =
+                        File::from_index(curr_file.to_index() + (c as usize) - '0' as usize);
+                }
+
                 _ => {}
             }
         }
-        println!("{:?}", curr_file);
     }
 }

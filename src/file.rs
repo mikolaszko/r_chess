@@ -25,6 +25,7 @@ const ALL_FILES: [File; NUM_FILES] = [
 ];
 
 impl File {
+    #[inline]
     pub fn from_index(i: usize) -> File {
         match i & 7 {
             0 => File::A,
@@ -38,10 +39,12 @@ impl File {
             _ => unreachable!(),
         }
     }
+    #[inline]
     pub fn left(&self) -> File {
         File::from_index(self.to_index().wrapping_sub(1))
     }
 
+    #[inline]
     pub fn right(&self) -> File {
         File::from_index(self.to_index() + 1)
     }

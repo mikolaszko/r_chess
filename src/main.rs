@@ -2,11 +2,10 @@ mod board;
 mod fen;
 mod file;
 mod piece;
-use std::{collections::HashMap, fs::File, path::Path};
+mod rank;
+use std::path::Path;
 
-use board::*;
 use fen::*;
-use piece::*;
 
 fn main() {
     //replace with command line arg in the future;
