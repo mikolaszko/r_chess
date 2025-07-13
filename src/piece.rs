@@ -1,4 +1,6 @@
-#[derive(Debug)]
+use std::marker::Copy;
+
+#[derive(Debug, Copy, Clone)]
 pub enum PieceName {
     King,
     Queen,
@@ -9,6 +11,7 @@ pub enum PieceName {
     Pawn,
 }
 
+#[derive(Debug, Copy, Clone)]
 pub struct Piece {
     pub name: PieceName,
 }
