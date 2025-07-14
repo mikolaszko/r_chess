@@ -3,6 +3,7 @@ mod fen;
 mod file;
 mod piece;
 mod rank;
+mod square;
 use std::path::Path;
 
 use fen::*;

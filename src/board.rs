@@ -17,7 +17,7 @@ pub struct Board {
 }
 
 impl Board {
-    fn new() -> Board {
+    pub fn new() -> Board {
         Board { pieces: [None; 64] }
     }
     //TODO do pretty stuff with the Piece notation, not the coords and even better

@@ -1,7 +1,7 @@
 use std::marker::Copy;
 
 #[derive(Debug, Copy, Clone)]
-pub enum PieceName {
+pub enum Piece {
     King,
     Queen,
     //knight
@@ -9,11 +9,6 @@ pub enum PieceName {
     Bishop,
     Rook,
     Pawn,
-}
-
-#[derive(Debug, Copy, Clone)]
-pub struct Piece {
-    pub name: PieceName,
 }
 
 impl Piece {
