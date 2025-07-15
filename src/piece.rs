@@ -1,11 +1,11 @@
 use std::marker::Copy;
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Piece {
     King,
     Queen,
     //knight
-    Night,
+    Knight,
     Bishop,
     Rook,
     Pawn,
