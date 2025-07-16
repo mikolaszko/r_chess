@@ -4,6 +4,8 @@ use std::fs;
 #[derive(Copy, Clone)]
 pub struct BoardBuilder {
     pieces: [Option<(Piece, Color)>; 64],
+    //TODO: implement
+    castling: u64,
     side_to_move: Color,
     en_passant: Option<File>,
 }
@@ -14,6 +16,7 @@ impl BoardBuilder {
     pub fn new() -> BoardBuilder {
         BoardBuilder {
             pieces: [None; 64],
+            castling: 2,
             side_to_move: Color::White,
             en_passant: None,
         }
@@ -108,6 +111,7 @@ impl BoardBuilder {
         }
         BoardBuilder {
             pieces: board.pieces,
+            castling: 2,
             side_to_move: Color::White,
             en_passant: None,
         }

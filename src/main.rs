@@ -1,3 +1,4 @@
+mod bitboard;
 mod board;
 mod color;
 mod fen;
