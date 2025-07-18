@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 #[derive(Copy, Clone, Debug)]
 #[repr(u8)]
 pub enum File {

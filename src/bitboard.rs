@@ -1,14 +1,45 @@
 use core::fmt;
-use std::ops::BitXor;
+use std::ops::{BitOr, BitXor, BitXorAssign};
 
-pub struct Bitboard(u64);
+use crate::square::Square;
+
+#[derive(PartialEq, Eq, PartialOrd, Clone, Copy, Debug, Default, Hash)]
+pub struct Bitboard(pub u64);
+
+pub const EMPTY: Bitboard = Bitboard(0);
+
+impl Bitboard {
+    pub fn new(i: u64) -> Self {
+        Bitboard(i)
+    }
+    pub fn from_square(sqr: Square) -> Bitboard {
+        Bitboard::new(1u64 >> sqr.to_int())
+    }
+
+    pub fn to_square(&self) -> Square {
+        Square::new(self.0.trailing_zeros() as u8)
+    }
+}
+
+impl BitOr for Bitboard {
+    type Output = Bitboard;
+    fn bitor(self, rhs: Self) -> Bitboard {
+        Bitboard(self.0 | rhs.0)
+    }
+}
 
 impl BitXor for Bitboard {
-    type Output = Self;
+    type Output = Bitboard;
 
     // rhs is the "right-hand side" of the expression `a ^ b`
-    fn bitxor(self, rhs: Self) -> Self::Output {
-        Self(self.0 ^ rhs.0)
+    fn bitxor(self, rhs: Self) -> Bitboard {
+        Bitboard(self.0 ^ rhs.0)
+    }
+}
+
+impl BitXorAssign for Bitboard {
+    fn bitxor_assign(&mut self, other: Bitboard) {
+        self.0 ^= other.0;
     }
 }
 
@@ -27,5 +58,20 @@ impl fmt::Display for Bitboard {
             }
         }
         write!(f, "{}", s)
+    }
+}
+/// For the `BitBoard`, iterate over every `Square` set.
+impl Iterator for Bitboard {
+    type Item = Square;
+
+    #[inline]
+    fn next(&mut self) -> Option<Square> {
+        if self.0 == 0 {
+            None
+        } else {
+            let result = self.to_square();
+            *self ^= Bitboard::from_square(result);
+            Some(result)
+        }
     }
 }
